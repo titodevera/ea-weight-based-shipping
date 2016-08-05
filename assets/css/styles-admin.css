@@ -1,0 +1,61 @@
+.eawbs-clearfix:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+.eawbs-pricing-table-wrapper{
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  max-width: 585px;
+}
+.eawbs-pricing-table{
+  border: 1px solid #ddd;
+}
+.eawbs-pricing-table .eawbs-pricing-table-row{
+  background-color: #fff;
+}
+.eawbs-pricing-table .eawbs-pricing-table-label{
+  padding: 4px 10px;
+  font-weight: bold;
+  padding-left: 34px;
+}
+.eawbs-pricing-table .eawbs-pricing-table-value{
+  padding: 14px 10px;
+}
+.eawbs-pricing-table h3{
+  margin-top: 20px;
+}
+.eawbs-pricing-table .eawbs-pricing-table-col-weight,
+.eawbs-pricing-table .eawbs-pricing-table-col-cost,
+.eawbs-pricing-table .eawbs-pricing-table-heading-weight,
+.eawbs-pricing-table .eawbs-pricing-table-heading-cost{
+  width: 48%;
+  float: left;
+}
+.eawbs-pricing-table .eawbs-pricing-table-col-actions,
+.eawbs-pricing-table .eawbs-pricing-table-heading-actions{
+  width: 4%;
+  float: left;
+}
+.eawbs-pricing-table input[type="text"]{
+  width: 100%;
+}
+.eawbs-pricing-table-col-actions,.eawbs-pricing-table-col-actions span{
+  line-height: 58px;
+  text-align: right;
+}
+.eawbs-pricing-table-col-actions span:hover{
+  cursor: pointer;
+}
+.eawbs-pricing-table-actions{
+  padding: 10px;
+  text-align: right;
+  background-color: #fff;
+  border: 1px solid #F1F1F1;
+}
+.eawbs-button-remove{
+  visibility: hidden;
+}
+.eawbs-pricing-table-actions button span.dashicons{
+  line-height: 30px;
+}
