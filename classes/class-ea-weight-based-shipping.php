@@ -30,6 +30,8 @@ class EA_Weight_Based_Shipping extends \WC_Shipping_Method {
 		$this->instance_form_fields = $this->get_settings();
 		$this->title                = $this->get_option( 'title' );
 		$this->packing_weight       = $this->get_option( 'packing_weight' );
+		$this->tax_percentage       = $this->get_option( 'tax_percentage' );
+		$this->extra_kg       			= $this->get_option( 'extra_kg' );
 	}
 
 	public function get_settings(){
@@ -51,6 +53,20 @@ class EA_Weight_Based_Shipping extends \WC_Shipping_Method {
 				'title' 		=> __( 'Packing Weight', 'ea-weight-based-shipping' ),
 				'type' 			=> 'text',
 				'description' 	=> __( 'The weight of the packaging will be added to the total weight of the order.', 'ea-weight-based-shipping' ),
+				'default'		=> 0,
+				'desc_tip'		=> true
+			),
+			'extra_kg' => array(
+				'title' 		=> __( 'Extra KG', 'ea-weight-based-shipping' ),
+				'type' 			=> 'text',
+				'description' 	=> __( 'Extra KG cost.', 'ea-weight-based-shipping' ),
+				'default'		=> 0,
+				'desc_tip'		=> true
+			),
+			'tax_percentage' => array(
+				'title' 		=> __( 'Tax', 'ea-weight-based-shipping' ),
+				'type' 			=> 'text',
+				'description' 	=> __( 'Tax percentage.', 'ea-weight-based-shipping' ),
 				'default'		=> 0,
 				'desc_tip'		=> true
 			)
@@ -134,16 +150,19 @@ class EA_Weight_Based_Shipping extends \WC_Shipping_Method {
 				break;
 			}
 			if($pricing_row === end($current_pricing_table)){
-				$shipping_cost = end($current_pricing_table)->cost;
+				$heaviest = end($current_pricing_table);
+				$extra = ($package_weight - $heaviest->weight) * $this->extra_kg;
+				$shipping_cost = $heaviest->cost + $extra;
 			}
 		}
 
-		$shipping_cost = $shipping_cost + $this->packing_weight;
+		$tax_percentage = $this->tax_percentage/100;
+		$tax = $tax_percentage * $shipping_cost;
 
 		$rate = array(
 			'id' => $this->id,
 			'label' => $this->title ,
-			'cost' => $shipping_cost,
+			'cost' => $tax + $shipping_cost,
 			'calc_tax' => 'per_item'
 		);
 
