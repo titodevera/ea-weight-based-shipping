@@ -3,14 +3,14 @@
 Plugin Name: EA Weight Based Shipping
 Plugin URI: https://github.com/eayllon/ea-weight-based-shipping
 Description: Weight based shipping for WooCommerce
-Version: 1.0.0
+Version: 1.0.1
 Author: Estudio Ayllón
 Author URI: https://estudioayllon.com
 Text Domain: ea-weight-based-shipping
 Domain Path: /lang
 License: GPL3
 
-    EA Weight Based Shipping version 1.0.0, Copyright (C) 2016 Estudio Ayllón
+    EA Weight Based Shipping version 1.0.1, Copyright (C) 2016 Estudio Ayllón
 
     EA Weight Based Shipping is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 define('EAWBS_PLUGIN', plugins_url( '', __FILE__ ));
 define('EAWBS_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('EAWBS_REL_PATH', plugin_basename( dirname( __FILE__ ) ));
-define('EAWBS_VERSION', '1.0.0');
+define('EAWBS_VERSION', '1.0.1');
 
 require_once 'classes/class-eawbs-plugin.php';
 new EAWBS_Plugin();

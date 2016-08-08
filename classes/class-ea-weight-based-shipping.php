@@ -124,18 +124,29 @@ class EA_Weight_Based_Shipping extends \WC_Shipping_Method {
 
 		$package_weight = $this->calculate_package_weight($package);
 
+		$current_pricing_table = get_option( 'eawbs-pricing-table-'.$this->instance_id);
+		$current_pricing_table = json_decode($current_pricing_table);
+		$shipping_cost = 0;
 
-		$shipping_zone          = \WC_Shipping_Zones::get_zone_matching_package( $package );
-		$shipping_methods = $shipping_zone->get_shipping_methods();
+		foreach ($current_pricing_table as $pricing_row) {
+			if($pricing_row->weight > $package_weight){
+				$shipping_cost = $pricing_row->cost;
+				break;
+			}
+			if($pricing_row === end($current_pricing_table)){
+				$shipping_cost = end($current_pricing_table)->cost;
+			}
+		}
+
+		$shipping_cost = $shipping_cost + $this->packing_weight;
 
 		$rate = array(
 			'id' => $this->id,
 			'label' => $this->title ,
-			'cost' => $package_weight,
+			'cost' => $shipping_cost,
 			'calc_tax' => 'per_item'
 		);
 
-		// Register the rate
 		$this->add_rate( $rate );
 
 	}
